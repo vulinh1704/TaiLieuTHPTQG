@@ -1,5 +1,7 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Matches, MinLength} from "class-validator";
+import {New} from "./New";
+import {Exam} from "./Exam";
 
 @Entity()
 export class User {
@@ -20,4 +22,8 @@ export class User {
     email: string;
     @Column({type: "int", nullable: true})
     gender: number;
+    @OneToMany(() => New, (post) => post.user)
+    posts: New[];
+    @OneToMany(() => Exam, (exam) => exam.user)
+    exams: Exam[];
 }
