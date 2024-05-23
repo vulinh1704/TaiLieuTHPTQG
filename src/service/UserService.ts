@@ -23,7 +23,7 @@ export class UserService {
         return this.userRepository.findUsernameAndPass(user);
     }
 
-    findById = async (id: number): Promise<UserDTO> | null => {
+    findById = async (id: number): Promise<User> | null => {
         return this.userRepository.findById(id);
     }
 

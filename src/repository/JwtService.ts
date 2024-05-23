@@ -19,7 +19,7 @@ export class JwtService {
                 idUser: userData.id
             }
             let token = jwt.sign(payload, JwtService.SECRET, {expiresIn: 36000 * 10 * 10});
-            return new JwtResponse(token);
+            return new JwtResponse(token, userData.role);
         } else {
             return null;
         }

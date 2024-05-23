@@ -1,5 +1,5 @@
 import {Repository} from "typeorm";
-import {AppDataSource} from "../configuration/data-source";
+import {AppDataSource} from "../configuration/dataSource";
 import {New} from "../model/New";
 import {NewDTO} from "../dto/NewDTO";
 

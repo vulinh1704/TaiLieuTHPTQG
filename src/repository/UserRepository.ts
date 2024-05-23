@@ -1,6 +1,6 @@
 import {Repository} from "typeorm";
 import {User} from "../model/User";
-import {AppDataSource} from "../configuration/data-source";
+import {AppDataSource} from "../configuration/dataSource";
 import bcrypt from "bcrypt";
 import {UserDTO} from "../dto/UserDTO";
 
@@ -33,10 +33,10 @@ export class UserRepository {
         }
     }
 
-    findById = async (id: number): Promise<UserDTO> | null => {
+    findById = async (id: number): Promise<User> | null => {
         let dataUser: User = await this.repository.findOneBy({id: id});
         if (dataUser) {
-            return new UserDTO(dataUser.id, dataUser.username, dataUser.avatar, dataUser.dateOfBirth, dataUser.email, dataUser.gender);
+            return dataUser;
         }
         return null;
     }

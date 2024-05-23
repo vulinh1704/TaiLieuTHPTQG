@@ -24,7 +24,7 @@ export class UserController {
             } else if (dataUser.username === dataUser.username) {
                 return res.status(StatusCodes.CONFLICT).json({error: "Username already exists"})
             }
-        }   else {
+        } else {
             await this.userService.save(user);
             return res.status(StatusCodes.OK).json({message: "Register Success"});
         }
@@ -38,11 +38,29 @@ export class UserController {
         } else {
             return res.status(StatusCodes.UNAUTHORIZED).json({message: "Username or Password is wrong"});
         }
+    };
+
+    changePassword = async (req, res) => {
+        let id = req.decode.idUser;
+        let currentUser = await this.userService.findById(id);
+        currentUser.password = req.body.password;
+        if (currentUser) {
+            let u = await this.userService.findUsernameAndPass(currentUser);
+            if (u) {
+                u.password = req.body.newPassword;
+                u = await this.userService.save(u);
+                return res.status(StatusCodes.OK).json(u);
+            } else {
+                return res.status(400).json({error: "Password is wrong"});
+            }
+        }
+        return res.status(StatusCodes.NO_CONTENT).json({error: "User not found"});
     }
+
 
     getCurrentUser = async (req, res: Response) => {
         let id = req.decode.idUser;
-        let currentUser: UserDTO = await this.userService.findById(id);
+        let currentUser = await this.userService.findById(id);
         if (currentUser) {
             return res.status(StatusCodes.OK).json(currentUser);
         }

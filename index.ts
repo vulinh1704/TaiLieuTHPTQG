@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express, {json} from "express";
-import {AppDataSource} from "./src/configuration/data-source";
+import {AppDataSource} from "./src/configuration/dataSource";
 import {api} from "./src/api/api";
 import cors from "cors";
 

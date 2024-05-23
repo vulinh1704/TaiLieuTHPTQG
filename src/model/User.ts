@@ -1,7 +1,8 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Matches, MinLength} from "class-validator";
 import {New} from "./New";
 import {Exam} from "./Exam";
+import {ResultExam} from "./ResultExam";
 
 @Entity()
 export class User {
@@ -16,14 +17,16 @@ export class User {
     role: string;
     @Column({type: "varchar", default: "https://thithu.edu.vn/logo/avatar-sm.png"})
     avatar: string;
-    @Column({type: "datetime", nullable: true})
+    @Column({type: "date", nullable: true})
     dateOfBirth: Date;
     @Column({type: "varchar", nullable: false, unique: true})
     email: string;
-    @Column({type: "int", nullable: true})
-    gender: number;
+    @Column({type: "varchar", nullable: true})
+    gender: string;
     @OneToMany(() => New, (post) => post.user)
-    posts: New[];
+    posts: New[]
+    @OneToMany(() => ResultExam, (resultExam) => resultExam.user)
+    resultExams: ResultExam[];
     @OneToMany(() => Exam, (exam) => exam.user)
-    exams: Exam[];
+    exams: Exam[]
 }

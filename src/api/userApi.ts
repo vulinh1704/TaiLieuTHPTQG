@@ -10,3 +10,4 @@ userApi.post("/login", userController.login);
 userApi.use(auth);
 userApi.get('', userController.getCurrentUser);
 userApi.put('', userController.edit);
+userApi.put('/change-password', userController.changePassword);

@@ -13,6 +13,11 @@ export class Question {
     exam: Exam;
     @ManyToOne(() => Type, (type) => type.questions)
     type: Type;
-    @OneToMany(() => Answer, (answer) => answer.question)
+    @OneToMany(() => Answer, (answer) => answer.question, {
+        cascade: true,
+        onDelete: 'CASCADE'
+    })
     answers: Answer[];
+    @Column({type: "varchar", default: "easy"})
+    level: string;
 }
