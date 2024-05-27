@@ -20,4 +20,6 @@ export class Question {
     answers: Answer[];
     @Column({type: "varchar", default: "easy"})
     level: string;
+    @Column({type: "varchar", default: null})
+    image: string;
 }
