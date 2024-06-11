@@ -19,5 +19,5 @@ export class ResultExam {
     @ManyToOne(() => User, (user) => user.resultExams)
     user: User;
     @OneToMany(() => ResultAnswer, (resultAnswer) => resultAnswer.resultExam)
-    resultAnswers: ResultAnswer[]
+    resultAnswers: ResultAnswer[];
 }

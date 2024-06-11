@@ -9,8 +9,8 @@ export class NewService {
         this.newRepository = new NewRepository();
     }
 
-    findAll = async (): Promise<NewDTO[]> | null => {
-        return this.newRepository.findAll();
+    findAll = async (keyword: string): Promise<NewDTO[]> | null => {
+        return this.newRepository.findAll(keyword);
     }
 
     add = async (post: New): Promise<NewDTO> | null => {

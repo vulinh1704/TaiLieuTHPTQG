@@ -1,4 +1,4 @@
-import {Repository} from "typeorm";
+import {ILike, Repository} from "typeorm";
 import {AppDataSource} from "../configuration/dataSource";
 import {New} from "../model/New";
 import {NewDTO} from "../dto/NewDTO";
@@ -10,11 +10,23 @@ export class NewRepository {
         this.repository = AppDataSource.getRepository(New);
     }
 
-    findAll = async (): Promise<NewDTO[]> | null => {
+    findAll = async (keyword: string): Promise<NewDTO[]> | null => {
+        let conditions: any = {};
+        if (keyword) {
+            conditions = [
+                {
+                    title: ILike(`%${keyword}%`)
+                },
+                {
+                    author: ILike(`%${keyword}%`)
+                }
+            ];
+        }
         return this.repository.find({
             order: {
                 timeAt: "DESC"
-            }
+            },
+            where: conditions
         });
     }
 

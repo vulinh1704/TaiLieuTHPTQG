@@ -15,4 +15,6 @@ export class ResultAnswer {
     question: Question;
     @ManyToOne(() => ResultExam, (resultExam) => resultExam.resultAnswers)
     resultExam: ResultExam;
+    @Column({type: 'text', nullable: true})
+    content: string;
 }

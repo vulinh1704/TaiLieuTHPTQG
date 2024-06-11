@@ -12,7 +12,8 @@ export class NewController {
     }
 
     findAll = async (req: Request, res: Response) => {
-        const list = await this.newService.findAll();
+        let query: any = req.query;
+        const list = await this.newService.findAll(query["keyword"]);
         if (list.length === 0) {
             return res.status(StatusCodes.NO_CONTENT).json({message: "Hiện bài không có bài viết nào"})
         }
